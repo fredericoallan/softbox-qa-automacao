@@ -3,6 +3,7 @@ var loginPage = require('./../../src/pages/login.page');
 var boardListPage = require('./../../src/pages/boardList.page');
 var boardPage = require('./../../src/pages/board.page');
 var quadroPage = require('./../../src/pages/quadro.page');
+var quadro = 'fred';
 
 describe('Boards Trello', function () {
     it("Validando a criação de um novo board", function () {
@@ -10,8 +11,8 @@ describe('Boards Trello', function () {
         loginPage.logar("qachallengesoftbox@email.com", "S0ftbox123");
         expect(basePage.getNomeUsuario()).to.equal('QA_CHALLENGE_SOFTBOX (qa_challenge_softbox)');
         boardListPage.open();
-        boardListPage.criarQuadro("Gerenciamento de projetos 2019 - Fred1");
-        expect(boardPage.getNomeQuadro()).to.equal("Gerenciamento de projetos 2019 - Fred1");
+        boardListPage.criarQuadro(quadro);
+        expect(boardPage.getNomeQuadro()).to.equal(quadro);
     });
 
     it("Removendo o board criado acima", function() {
@@ -22,11 +23,10 @@ describe('Boards Trello', function () {
         // 5. Confirma mensagem de sucesso que o quadro está fechado
         // 6. Acessar página da lista de quadros novamente e verificar se de fato o quadro foi removido
         boardListPage.open();
-        boardListPage.abrirQuadro("Gerenciamento de projetos 2019 - Fred1");
-        expect(quadroPage.getNomeQuadro().to.equal("Gerenciamento de projetos 2019 - Fred1"));
-        quadroPage.excluirQuadro();
-        expect(quadroPage.getMsgQuadroExcluido()).to.equal("Gerenciamento de projetos 2019 - Fred1 está fechado.");
+        boardListPage.abrirQuadro(quadro);
+        expect(quadroPage.getNomeQuadro()).to.equal(quadro);
+        quadroPage.excluirQuadro(quadro);
         boardListPage.open();
-        expect(boardListPage.validarQuadro("Gerenciamento de projetos 2019 - Fred1")).to.equal(false);
+        expect(boardListPage.validarQuadro(quadro)).to.equal(false);
     });
 });

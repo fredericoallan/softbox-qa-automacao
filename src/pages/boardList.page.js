@@ -16,6 +16,7 @@ const BoardListPage = function() {
 
 
   this.criarQuadro = function(nome) {
+    browser.waitForVisible(this.seletores.botaoCriarNovoQuadro);
     browser.element(this.seletores.botaoCriarNovoQuadro).click();
     browser.waitForVisible(this.seletores.modalCriarQuadro.nomeQuadro);
     browser.element(this.seletores.modalCriarQuadro.nomeQuadro).setValue(nome);
@@ -23,6 +24,7 @@ const BoardListPage = function() {
   };
 
   this.abrirQuadro = function(quadro){
+    browser.waitForVisible("div[title='" + quadro + "']");
     browser.element("div[title='" + quadro + "']").click();
     browser.waitForVisible("div[title='" + quadro + "']",false);
   }
