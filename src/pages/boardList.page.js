@@ -14,12 +14,22 @@ const BoardListPage = function() {
     basePage.open("qa_challenge_softbox/boards")
   };
 
+
   this.criarQuadro = function(nome) {
     browser.element(this.seletores.botaoCriarNovoQuadro).click();
     browser.waitForVisible(this.seletores.modalCriarQuadro.nomeQuadro);
     browser.element(this.seletores.modalCriarQuadro.nomeQuadro).setValue(nome);
     browser.element(this.seletores.modalCriarQuadro.botaoCriarNovoQuadro).click();
   };
+
+  this.abrirQuadro = function(quadro){
+    browser.element("div[title='" + quadro + "']").click();
+    browser.waitForVisible("div[title='" + quadro + "']",false);
+  }
+
+  this.validarQuadro = function(quadro){
+    return browser.isExisting("div[title='" + quadro + "']");
+  }
 
 };
 
